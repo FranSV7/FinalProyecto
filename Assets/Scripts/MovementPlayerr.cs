@@ -5,10 +5,15 @@ using UnityEngine;
 public class MovementPlayerr : MonoBehaviour
 {
     public float speed= 3;
+    public Light flashlight;
+    public AudioSource linternaSound;
     
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        flashlight.enabled = false;
+        linternaSound = GetComponent<AudioSource>();
+        linternaSound.Stop();
     }
 
     // Update is called once per frame
@@ -31,6 +36,15 @@ public class MovementPlayerr : MonoBehaviour
         else
         {
             speed = 3;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if(Input.GetMouseButtonDown(1))
+        {
+            flashlight.enabled = !flashlight.enabled;
+            linternaSound.Play();
         }
     }
 
